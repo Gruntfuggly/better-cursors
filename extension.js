@@ -19,26 +19,27 @@ function activate( context )
 
                     var document = editor.document;
 
+                    var selectionOffset = 0;
                     var selectedText = document.getText();
 
                     if( hasSelection )
                     {
                         selectionOffset = document.offsetAt( selection.start );
                         selectedText = selectedText.substring( selectionOffset, document.offsetAt( selection.end ) );
-                        // range = selection;
                     }
 
-                    selectedText = selectedText.replace( term, function( match, g1, g2, g3 )
+                    var newSelections = [];
+
+                    var pattern = new RegExp( term, 'gm' );
+
+                    selectedText = selectedText.replace( pattern, function( match, offset )
                     {
-                        var offset = arguments[ arguments.length - 2 ];
-                        console.log( "offset:" + offset );
-                        var cursorPosition = document.positionAt( offset + selectionOffset );
-                        console.log( 100 );
-                        editor.selection = new vscode.Selection( cursorPosition, cursorPosition );
-                        console.log( 101 );
-                        vscode.commands.executeCommand( 'createCursor' );
-                        console.log( 102 );
+                        var stop = document.positionAt( offset + selectionOffset );
+                        var start = match.length > 1 ? document.positionAt( offset + selectionOffset + match.length ) : stop;
+                        newSelections.push( new vscode.Selection( start, stop ) );
                     } );
+
+                    editor.selections = newSelections;
                 }
             } );
     } ) );
