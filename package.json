@@ -1,0 +1,30 @@
+{
+    "name": "create-cursors-in-selection",
+    "displayName": "Create Cursors In Selection",
+    "description": "Create multiple cursors within the selection based on the entered text",
+    "icon": "icon.png",
+    "version": "0.0.1",
+    "publisher": "Gruntfuggly",
+    "repository": "https://github.com/Gruntfuggly/create-cursors-in-selection",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "create-cursors-in-selection.enterSearchTerm",
+                "title": "Create Cursors In Selection"
+            }
+        ]
+    },
+    "devDependencies": {
+        "vscode": "^1.0.0"
+    }
+}
