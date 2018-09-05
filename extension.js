@@ -1,14 +1,19 @@
 var vscode = require( 'vscode' );
 
+var lastTerm;
+var previousCursors = [];
+
 function activate( context )
 {
-    context.subscriptions.push( vscode.commands.registerCommand( 'create-cursors-in-selection.enterSearchTerm', function()
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.enterSearchTerm', function()
     {
-        vscode.window.showInputBox( { prompt: "Create cursors at every:" } ).then(
+        vscode.window.showInputBox( { prompt: "Create cursors at every:", value: lastTerm } ).then(
             function( term )
             {
                 if( term )
                 {
+                    lastTerm = term;
+
                     var editor = vscode.window.activeTextEditor;
                     var selection = editor.selection;
 
@@ -42,6 +47,136 @@ function activate( context )
                     editor.selections = newSelections;
                 }
             } );
+    } ) );
+
+
+    function positionCursors( prompt, method )
+    {
+        function positionCursorsWithTerm( term )
+        {
+            if( term )
+            {
+                var editor = vscode.window.activeTextEditor;
+
+                lastTerm = term;
+                previousCursors.push( editor.selections );
+
+                var newSelections = [];
+
+                editor.selections.map( function( selection )
+                {
+                    var document = editor.document;
+                    var line = document.lineAt( selection.start );
+                    var lineOffset = document.offsetAt( line.range.start );
+                    var cursorOffset = document.offsetAt( selection.start );
+                    var position = method( line.text, cursorOffset - lineOffset, term );
+                    if( position !== -1 )
+                    {
+                        var stop = document.positionAt( lineOffset + position );
+                        var start = term.length > 1 ? document.positionAt( lineOffset + position + term.length ) : stop;
+                        newSelections.push( new vscode.Selection( start, stop ) );
+                    }
+                } );
+
+                if( newSelections.length > 0 )
+                {
+                    editor.selections = newSelections;
+                }
+            }
+        }
+
+        if( prompt || lastTerm === undefined )
+        {
+            vscode.window.showInputBox( { prompt: "Move cursors to " + prompt + ":", value: lastTerm } ).then(
+                function( term )
+                {
+                    positionCursorsWithTerm( term );
+                }
+            )
+        }
+        else
+        {
+            positionCursorsWithTerm( lastTerm );
+        }
+    }
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToNext', function()
+    {
+        positionCursors( "next", function( text, offset, term )
+        {
+            var position = text.substr( offset + 1 ).indexOf( term )
+            return position === -1 ? position : offset + 1 + position;
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToPrevious', function()
+    {
+        positionCursors( "previous", function( text, offset, term )
+        {
+            return text.substr( 0, offset - 1 ).lastIndexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToFirst', function()
+    {
+        positionCursors( "first", function( text, offset, term )
+        {
+            return text.indexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToLast', function()
+    {
+        positionCursors( "last", function( text, offset, term )
+        {
+            return text.lastIndexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameNext', function()
+    {
+        positionCursors( undefined, function( text, offset, term )
+        {
+            var position = text.substr( offset + 1 ).indexOf( term )
+            return position === -1 ? position : offset + 1 + position;
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSamePrevious', function()
+    {
+        positionCursors( undefined, function( text, offset, term )
+        {
+            return text.substr( 0, offset - 1 ).lastIndexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameFirst', function()
+    {
+        positionCursors( undefined, function( text, offset, term )
+        {
+            return text.indexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameLast', function()
+    {
+        positionCursors( undefined, function( text, offset, term )
+        {
+            return text.lastIndexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.restorePreviousCursors', function()
+    {
+        var editor = vscode.window.activeTextEditor;
+        if( previousCursors.length > 0 )
+        {
+            editor.selections = previousCursors.pop();
+        }
+        else
+        {
+            vscode.window.showInformationMessage( "No previous cursors" );
+        }
     } ) );
 }
 

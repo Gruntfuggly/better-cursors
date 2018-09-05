@@ -1,11 +1,11 @@
 {
-    "name": "create-cursors-in-selection",
-    "displayName": "Create Cursors In Selection",
-    "description": "Create multiple cursors within the selection based on the entered text",
+    "name": "better-cursors",
+    "displayName": "Better Cursors",
+    "description": "Create multiple cursors within the selection based on the entered text and move multiple cursors to similar places",
     "icon": "icon.png",
     "version": "0.0.1",
     "publisher": "Gruntfuggly",
-    "repository": "https://github.com/Gruntfuggly/create-cursors-in-selection",
+    "repository": "https://github.com/Gruntfuggly/better-cursors",
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -19,8 +19,40 @@
     "contributes": {
         "commands": [
             {
-                "command": "create-cursors-in-selection.enterSearchTerm",
+                "command": "better-cursors.enterSearchTerm",
                 "title": "Create Cursors In Selection"
+            },
+            {
+                "command": "better-cursors.moveCursorsToNext",
+                "title": "Move Cursors To Next"
+            },
+            {
+                "command": "better-cursors.moveCursorsToPrevious",
+                "title": "Move Cursors To Previous"
+            },
+            {
+                "command": "better-cursors.moveCursorsToFirst",
+                "title": "Move Cursors To First"
+            },
+            {
+                "command": "better-cursors.moveCursorsToLast",
+                "title": "Move Cursors To Last"
+            },
+            {
+                "command": "better-cursors.moveCursorsToSameNext"
+            },
+            {
+                "command": "better-cursors.moveCursorsToSamePrevious"
+            },
+            {
+                "command": "better-cursors.moveCursorsToSameFirst"
+            },
+            {
+                "command": "better-cursors.moveCursorsToSameLast"
+            },
+            {
+                "command": "better-cursors.restorePreviousCursors",
+                "title": "Restore Previous Cursors"
             }
         ]
     },
