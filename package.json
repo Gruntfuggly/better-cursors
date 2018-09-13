@@ -39,16 +39,20 @@
                 "title": "Move Cursors To Last"
             },
             {
-                "command": "better-cursors.moveCursorsToSameNext"
+                "command": "better-cursors.moveCursorsToSameNext",
+                "title": "Move Cursors To Next Using Same Term"
             },
             {
-                "command": "better-cursors.moveCursorsToSamePrevious"
+                "command": "better-cursors.moveCursorsToSamePrevious",
+                "title": "Move Cursors To Previous Using Same Term"
             },
             {
-                "command": "better-cursors.moveCursorsToSameFirst"
+                "command": "better-cursors.moveCursorsToSameFirst",
+                "title": "Move Cursors To First Using Same Term"
             },
             {
-                "command": "better-cursors.moveCursorsToSameLast"
+                "command": "better-cursors.moveCursorsToSameLast",
+                "title": "Move Cursors To Last Using Same Term"
             },
             {
                 "command": "better-cursors.restorePreviousCursors",

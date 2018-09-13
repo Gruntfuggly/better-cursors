@@ -1,18 +1,28 @@
-# Create Cursors In Selection
+# Better Cursors
 
 Select some text, press F1, choose 'Create Cursors In Selection' and enter the character (or characters) where you want to create cursors.
+
+Once your multiple cursors are created, move them around...
 
 ### Commands
 
 `Create Cursors In Selection` - prompts for some text to find in the selection and creates cursors at all locations.
 
-`Move Cursors To Next` - prompts for some text and moves all cursors to the next instance on the line of the that text 
+`Move Cursors To Next` - prompts for some text and moves all cursors to the next instance on the line of the that text
 
-`Move Cursors To Previous` - prompts for some text and moves all cursors to the previous instance on the line of the that text 
+`Move Cursors To Previous` - prompts for some text and moves all cursors to the previous instance on the line of the that text
 
-`Move Cursors To First` - prompts for some text and moves all cursors to the first instance on the line of the that text 
+`Move Cursors To First` - prompts for some text and moves all cursors to the first instance on the line of the that text
 
-`Move Cursors To Last` - prompts for some text and moves all cursors to the last instance on the line of the that text 
+`Move Cursors To Last` - prompts for some text and moves all cursors to the last instance on the line of the that text
+
+`Move Cursors To Next Using Same Term` - moves all cursors to the next instance on the line using the same text
+
+`Move Cursors To Previous Using Same Term` - moves all cursors to the previous instance on the line of the that text using the same text
+
+`Move Cursors To First Using Same Term` - moves all cursors to the first instance on the line of the that text using the same text
+
+`Move Cursors To Last Using Same Term` - moves all cursors to the last instance on the line of the that text using the same text
 
 `Restore Previous Cursors` - restores the previous set of cursors (after a move command)
 
@@ -24,11 +34,11 @@ Select some text, press F1, choose 'Create Cursors In Selection' and enter the c
 
 ## Installing
 
-You can install the latest version of the extension via the Visual Studio Marketplace [here](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.create-cursors-in-selection).
+You can install the latest version of the extension via the Visual Studio Marketplace [here](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.better-cursors).
 
 ### Source Code
 
-The source code is available on GitHub [here](https://github.com/Gruntfuggly/create-cursors-in-selection).
+The source code is available on GitHub [here](https://github.com/Gruntfuggly/better-cursors).
 
 ## Credits
 
