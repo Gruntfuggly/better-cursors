@@ -3,7 +3,7 @@
     "displayName": "Better Cursors",
     "description": "Create multiple cursors within the selection based on the entered text and move multiple cursors to similar places",
     "icon": "icon.png",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "Gruntfuggly",
     "repository": "https://github.com/Gruntfuggly/better-cursors",
     "engines": {
@@ -27,8 +27,16 @@
                 "title": "Move Cursors To Next"
             },
             {
+                "command": "better-cursors.moveCursorsToNextSelect",
+                "title": "Move Cursors To Next With Select"
+            },
+            {
                 "command": "better-cursors.moveCursorsToPrevious",
                 "title": "Move Cursors To Previous"
+            },
+            {
+                "command": "better-cursors.moveCursorsToPreviousSelect",
+                "title": "Move Cursors To Previous With Select"
             },
             {
                 "command": "better-cursors.moveCursorsToFirst",
@@ -62,5 +70,10 @@
     },
     "devDependencies": {
         "vscode": "^1.0.0"
+    },
+    "__metadata": {
+        "id": "8bfb7f96-a0e5-4a9e-8f81-3997a236dc40",
+        "publisherDisplayName": "Gruntfuggly",
+        "publisherId": "d4906d2e-f2ee-492d-9c7c-02b6160599ec"
     }
 }

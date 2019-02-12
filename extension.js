@@ -50,7 +50,7 @@ function activate( context )
     } ) );
 
 
-    function positionCursors( prompt, method )
+    function positionCursors( prompt, select, method )
     {
         function positionCursorsWithTerm( term )
         {
@@ -74,7 +74,14 @@ function activate( context )
                     {
                         var stop = document.positionAt( lineOffset + position );
                         var start = term.length > 1 ? document.positionAt( lineOffset + position + term.length ) : stop;
-                        newSelections.push( new vscode.Selection( start, stop ) );
+                        if( select )
+                        {
+                            newSelections.push( new vscode.Selection( selection.start, start ) );
+                        }
+                        else
+                        {
+                            newSelections.push( new vscode.Selection( start, stop ) );
+                        }
                     }
                 } );
 
@@ -102,7 +109,16 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToNext', function()
     {
-        positionCursors( "next", function( text, offset, term )
+        positionCursors( "next", false, function( text, offset, term )
+        {
+            var position = text.substr( offset + 1 ).indexOf( term )
+            return position === -1 ? position : offset + 1 + position;
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToNextSelect', function()
+    {
+        positionCursors( "next", true, function( text, offset, term )
         {
             var position = text.substr( offset + 1 ).indexOf( term )
             return position === -1 ? position : offset + 1 + position;
@@ -111,7 +127,15 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToPrevious', function()
     {
-        positionCursors( "previous", function( text, offset, term )
+        positionCursors( "previous", false, function( text, offset, term )
+        {
+            return text.substr( 0, offset - 1 ).lastIndexOf( term );
+        } );
+    } ) );
+
+    context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToPreviousSelect', function()
+    {
+        positionCursors( "previous", true, function( text, offset, term )
         {
             return text.substr( 0, offset - 1 ).lastIndexOf( term );
         } );
@@ -119,7 +143,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToFirst', function()
     {
-        positionCursors( "first", function( text, offset, term )
+        positionCursors( "first", false, function( text, offset, term )
         {
             return text.indexOf( term );
         } );
@@ -127,7 +151,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToLast', function()
     {
-        positionCursors( "last", function( text, offset, term )
+        positionCursors( "last", false, function( text, offset, term )
         {
             return text.lastIndexOf( term );
         } );
@@ -135,7 +159,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameNext', function()
     {
-        positionCursors( undefined, function( text, offset, term )
+        positionCursors( undefined, false, function( text, offset, term )
         {
             var position = text.substr( offset + 1 ).indexOf( term )
             return position === -1 ? position : offset + 1 + position;
@@ -144,7 +168,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSamePrevious', function()
     {
-        positionCursors( undefined, function( text, offset, term )
+        positionCursors( undefined, false, function( text, offset, term )
         {
             return text.substr( 0, offset - 1 ).lastIndexOf( term );
         } );
@@ -152,7 +176,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameFirst', function()
     {
-        positionCursors( undefined, function( text, offset, term )
+        positionCursors( undefined, false, function( text, offset, term )
         {
             return text.indexOf( term );
         } );
@@ -160,7 +184,7 @@ function activate( context )
 
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.moveCursorsToSameLast', function()
     {
-        positionCursors( undefined, function( text, offset, term )
+        positionCursors( undefined, false, function( text, offset, term )
         {
             return text.lastIndexOf( term );
         } );

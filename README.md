@@ -12,6 +12,10 @@ Once your multiple cursors are created, move them around...
 
 `Move Cursors To Previous` - prompts for some text and moves all cursors to the previous instance on the line of the that text
 
+`Move Cursors To Next With Select` - prompts for some text and moves all cursors to the next instance on the line of the that text with selection
+
+`Move Cursors To Previous With Select` - prompts for some text and moves all cursors to the previous instance on the line of the that text with selection
+
 `Move Cursors To First` - prompts for some text and moves all cursors to the first instance on the line of the that text
 
 `Move Cursors To Last` - prompts for some text and moves all cursors to the last instance on the line of the that text
