@@ -1,3 +1,6 @@
+# v0.0.3 - 2019-03-13
+- Add search scope configuration
+
 # v0.0.2 - 2019-02-12
 - Add new functions for selection
 

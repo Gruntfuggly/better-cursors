@@ -52,6 +52,21 @@ function activate( context )
 
     function positionCursors( prompt, select, method )
     {
+        function getSearchScope( document, selection )
+        {
+            var scope = vscode.workspace.getConfiguration( 'better-cursors' ).get( 'scope' );
+            if( scope === "line" )
+            {
+                return document.lineAt( selection.start );
+            }
+            else if( scope === "document" )
+            {
+                var text = document.getText();
+                var range = new vscode.Range( document.positionAt( 0 ), document.positionAt( text.length - 1 ) );
+                return { text: text, range: range };
+            }
+        }
+
         function positionCursorsWithTerm( term )
         {
             if( term )
@@ -66,14 +81,14 @@ function activate( context )
                 editor.selections.map( function( selection )
                 {
                     var document = editor.document;
-                    var line = document.lineAt( selection.start );
-                    var lineOffset = document.offsetAt( line.range.start );
+                    var searchScope = getSearchScope( document, selection );
+                    var scopeOffset = document.offsetAt( searchScope.range.start );
                     var cursorOffset = document.offsetAt( selection.start );
-                    var position = method( line.text, cursorOffset - lineOffset, term );
+                    var position = method( searchScope.text, cursorOffset - scopeOffset, term );
                     if( position !== -1 )
                     {
-                        var stop = document.positionAt( lineOffset + position );
-                        var start = term.length > 1 ? document.positionAt( lineOffset + position + term.length ) : stop;
+                        var stop = document.positionAt( scopeOffset + position );
+                        var start = term.length > 1 ? document.positionAt( scopeOffset + position + term.length ) : stop;
                         if( select )
                         {
                             newSelections.push( new vscode.Selection( selection.start, start ) );

@@ -32,9 +32,19 @@ Once your multiple cursors are created, move them around...
 
 #### Notes:
 
-- When creating cursors, if there is no selection, the whole document will be used.
+When creating cursors, if there is no selection, the whole document will be used.
+
+When `better-cursors.scope` is set to `line` (the default):
 - If there are no previous or next instances of the text on a line, the cursor will be removed.
 - If there are no instances found on any line, the cursors won't be changed.
+
+When `better-cursors.scope` is set to `document`:
+- Multiple cursors will be collapsed if they find the same instance of the search term.
+
+### Configuration
+
+`better-cursors.scope` determines how far to search. Setting to `line` (the default) searches only to the end of the line containing the cursor. Setting to `document` will keep searching on subsequent lines, up to the end of the document.
+
 
 ## Installing
 

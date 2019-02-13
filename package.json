@@ -3,7 +3,7 @@
     "displayName": "Better Cursors",
     "description": "Create multiple cursors within the selection based on the entered text and move multiple cursors to similar places",
     "icon": "icon.png",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "Gruntfuggly",
     "repository": "https://github.com/Gruntfuggly/better-cursors",
     "engines": {
@@ -17,6 +17,24 @@
     ],
     "main": "./extension",
     "contributes": {
+        "configuration": {
+            "title": "Better Cursors",
+            "properties": {
+                "better-cursors.scope": {
+                    "type": "string",
+                    "markdownDescription": "By default the scope for searching for each term is the current line. Setting this to `file` will search the document instead.",
+                    "default": "line",
+                    "enum": [
+                        "line",
+                        "document"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Search the line containing the cursor for the entered term",
+                        "Search the entire document for the entered term"
+                    ]
+                }
+            }
+        },
         "commands": [
             {
                 "command": "better-cursors.enterSearchTerm",
