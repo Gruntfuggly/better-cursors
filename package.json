@@ -38,51 +38,51 @@
         "commands": [
             {
                 "command": "better-cursors.enterSearchTerm",
-                "title": "Create Cursors In Selection"
+                "title": "Better Cursors: Create Cursors In Selection"
             },
             {
                 "command": "better-cursors.moveCursorsToNext",
-                "title": "Move Cursors To Next"
+                "title": "Better Cursors: Move Cursors To Next"
             },
             {
                 "command": "better-cursors.moveCursorsToNextSelect",
-                "title": "Move Cursors To Next With Select"
+                "title": "Better Cursors: Move Cursors To Next With Select"
             },
             {
                 "command": "better-cursors.moveCursorsToPrevious",
-                "title": "Move Cursors To Previous"
+                "title": "Better Cursors: Move Cursors To Previous"
             },
             {
                 "command": "better-cursors.moveCursorsToPreviousSelect",
-                "title": "Move Cursors To Previous With Select"
+                "title": "Better Cursors: Move Cursors To Previous With Select"
             },
             {
                 "command": "better-cursors.moveCursorsToFirst",
-                "title": "Move Cursors To First"
+                "title": "Better Cursors: Move Cursors To First"
             },
             {
                 "command": "better-cursors.moveCursorsToLast",
-                "title": "Move Cursors To Last"
+                "title": "Better Cursors: Move Cursors To Last"
             },
             {
                 "command": "better-cursors.moveCursorsToSameNext",
-                "title": "Move Cursors To Next Using Same Term"
+                "title": "Better Cursors: Move Cursors To Next Using Same Term"
             },
             {
                 "command": "better-cursors.moveCursorsToSamePrevious",
-                "title": "Move Cursors To Previous Using Same Term"
+                "title": "Better Cursors: Move Cursors To Previous Using Same Term"
             },
             {
                 "command": "better-cursors.moveCursorsToSameFirst",
-                "title": "Move Cursors To First Using Same Term"
+                "title": "Better Cursors: Move Cursors To First Using Same Term"
             },
             {
                 "command": "better-cursors.moveCursorsToSameLast",
-                "title": "Move Cursors To Last Using Same Term"
+                "title": "Better Cursors: Move Cursors To Last Using Same Term"
             },
             {
                 "command": "better-cursors.restorePreviousCursors",
-                "title": "Restore Previous Cursors"
+                "title": "Better Cursors: Restore Previous Cursors"
             }
         ]
     },
