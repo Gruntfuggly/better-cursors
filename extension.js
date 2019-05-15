@@ -1,10 +1,17 @@
 var vscode = require( 'vscode' );
 
-var lastTerm;
-var previousCursors = [];
-
 function activate( context )
 {
+    var lastTerm = context.workspaceState.get( 'last-term' );
+    console.log( "lastTerm :" + lastTerm );
+    var previousCursors = [];
+
+    function updateLastTerm( term )
+    {
+        lastTerm = term;
+        context.workspaceState.update( 'last-term', lastTerm );
+    }
+
     context.subscriptions.push( vscode.commands.registerCommand( 'better-cursors.enterSearchTerm', function()
     {
         vscode.window.showInputBox( { prompt: "Create cursors at every:", value: lastTerm } ).then(
@@ -12,7 +19,7 @@ function activate( context )
             {
                 if( term )
                 {
-                    lastTerm = term;
+                    updateLastTerm( term );
 
                     var editor = vscode.window.activeTextEditor;
                     var selection = editor.selection;
@@ -73,7 +80,7 @@ function activate( context )
             {
                 var editor = vscode.window.activeTextEditor;
 
-                lastTerm = term;
+                updateLastTerm( term );
                 previousCursors.push( editor.selections );
 
                 var newSelections = [];

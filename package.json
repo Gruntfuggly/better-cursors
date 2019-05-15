@@ -3,7 +3,7 @@
     "displayName": "Better Cursors",
     "description": "Create multiple cursors within the selection based on the entered text and move multiple cursors to similar places",
     "icon": "icon.png",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "Gruntfuggly",
     "repository": "https://github.com/Gruntfuggly/better-cursors",
     "engines": {
