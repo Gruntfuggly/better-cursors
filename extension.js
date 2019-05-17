@@ -3,7 +3,6 @@ var vscode = require( 'vscode' );
 function activate( context )
 {
     var lastTerm = context.workspaceState.get( 'last-term' );
-    console.log( "lastTerm :" + lastTerm );
     var previousCursors = [];
 
     function updateLastTerm( term )
